@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const flipbook = document.getElementById('flipbook');
     let currentPage = 0;
+    let startX;
 
     function showPage(page) {
-        const flipbook = document.getElementById('flipbook');
         const totalPages = document.querySelectorAll('.page').length;
         
         // ページの範囲を制限
@@ -28,5 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (event.key === 'ArrowLeft') {
             showPage(currentPage - 1);
         }
+    });
+
+    // タッチイベントの追加
+    flipbook.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    flipbook.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (diff > 50) {
+            showPage(currentPage + 1);
+        } else if (diff < -50) {
+            showPage(currentPage - 1);
+        }
+    });
+
+    // ウィンドウリサイズ時の対応
+    window.addEventListener('resize', () => {
+        showPage(currentPage);
     });
 });
