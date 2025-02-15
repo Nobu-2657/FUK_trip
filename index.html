@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スマートフォン用画像スライダー</title>
+    <title>旅のしおり</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css">
     <style>
         .swiper-container {
             width: 100%;
-            height: 300px;
+            height: auto;
+            aspect-ratio: 16 / 9; /* アスペクト比を設定 */
         }
+
         .swiper-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px 20px;
+            color: #000;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
@@ -37,11 +51,29 @@
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 1,
             spaceBetween: 30,
-            loop: true,
+            loop: false,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            allowSlidePrev: true,
+            allowSlideNext: true,
+            on: {
+                reachEnd: function() {
+                    this.allowSlideNext = false;
+                },
+                reachBeginning: function() {
+                    this.allowSlidePrev = false;
+                },
+                fromEdge: function() {
+                    this.allowSlideNext = true;
+                    this.allowSlidePrev = true;
+                }
+            }
         });
     </script>
 </body>
