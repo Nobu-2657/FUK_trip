@@ -44,3 +44,23 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+/* スマートフォン用のスタイル */
+@media (max-width: 600px) {
+    body {
+        height: auto;
+    }
+
+    #flipbook {
+        height: 100vh;
+    }
+
+    .page {
+        height: auto;
+    }
+
+    .page img {
+        width: 100%;
+        height: auto;
+    }
+}
