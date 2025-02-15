@@ -6,9 +6,26 @@
     <title>旅のしおり</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css">
     <style>
+        body {
+            margin: 0; /* bodyのmarginを削除 */
+            padding: 0; /* bodyのpaddingを削除 */
+            background-color: #333; /* 背景色を少し暗く */
+            overflow: hidden; /* スクロールバーを非表示 */
+        }
+
+        html {
+            height: 100%; /* htmlの高さを100%に */
+        }
+
+        body {
+            height: 100%; /* bodyの高さを100%に */
+            display: flex;
+            flex-direction: column;
+        }
+
         .swiper-container {
             width: 100%;
-            height: auto;
+            height: 100%; /* スライダーの高さを100%に */
             aspect-ratio: 1000 / 1414; /* 画像のアスペクト比に合わせる */
         }
 
@@ -28,6 +45,13 @@
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
             background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
@@ -63,6 +87,7 @@
             allowTouchMove: true, /* タッチでのスワイプを許可 */
             touchRatio: 1, /* タッチ感度を最大に */
             resistance: false, /* 抵抗をなくす */
+            initialSlide: 0, /* 最初のスライドを0に設定 */
         });
     </script>
 </body>
